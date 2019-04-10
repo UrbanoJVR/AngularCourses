@@ -1,0 +1,29 @@
+<div style="width: 100%; height: 50px; margin-top: 1%; text-align: center" class="text-light bg-dark">
+  <h1>CURSOS AUTENTIA</h1>
+</div>
+<div style="margin-top: 1%; width: 130%" class = "container">
+  <table style="text-align: center" class="table table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>TÍTULO</th>
+        <th>NIVEL</th>
+        <th>HORAS</th>
+        <th>PROFESOR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses; index as i">
+        <th scope="row">{{course.id}}</th>
+        <td>{{course.title}}</td>
+        <td>{{course.level}}</td>
+        <td>{{course.hours}}</td>
+        <td>{{course.teacher.name}}</td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
+
+
