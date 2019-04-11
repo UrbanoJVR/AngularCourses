@@ -15,7 +15,12 @@ export class CoursesComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService) { }
 
   searchCourses() {
-    this.sub = this.apiService.getCourses().subscribe(response => this.courses = response.content, error => console.log(error));
+    this.sub = this.apiService.getCourses().subscribe(
+      response => {
+        this.courses = response.content;
+        console.log(response);
+        // console.log(response.content);
+      }, error => console.log(error));
   }
 
   ngOnDestroy(): void {
