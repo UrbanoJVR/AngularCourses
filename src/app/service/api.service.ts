@@ -14,7 +14,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getTeachers() {
-    return this.http.get<Page<Teacher>>('localhost:8080/teachers');
+    return this.http.get<Page<Teacher>>(this.BASE_URI + '/teachers?size=' + Number.MAX_SAFE_INTEGER + '&page=' + 0);
   }
 
   getCourses(pageSize: number, pageNumber: number) {

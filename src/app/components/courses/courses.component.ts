@@ -74,7 +74,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
     this.dialog.open(PoupCourseComponent, dialogConfig);
