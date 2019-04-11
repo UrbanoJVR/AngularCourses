@@ -1,0 +1,18 @@
+Go inside the project folder and install the hammerjs using the following command.
+
+npm install --save hammerjs
+
+Hammer.js is an optional dependency and helps with touch support for the few of the components.
+
+Now, install Angular Material and Angular Animations using the following command.
+
+npm install --save @angular/material @angular/animations @angular/cdk
+
+Now, include hammerjs inside an angular.json file. You can find this file on the root of the angular project.
+
+
+READ MORE AT:
+
+https://appdividend.com/2019/02/11/angular-modal-tutorial-with-example-angular-material-dialog/
+
+https://blog.angular-university.io/angular-material-dialog/
