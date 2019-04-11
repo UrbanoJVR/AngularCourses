@@ -52,10 +52,11 @@
     <li class="nav-item" style="margin-left: 1px">
       <label>
         <select class="custom-select">
-          <option value=5 (click)="changePageSize(5)">5</option>
-          <option value=10 (click)="changePageSize(10)">10</option>
-          <option value=15 (click)="changePageSize(15)">15</option>
-          <option value=20 (click)="changePageSize(20)">20</option>
+          <option (click)="changePageSize(1)">1</option>
+          <option selected (click)="changePageSize(5)">5</option>
+          <option (click)="changePageSize(10)">10</option>
+          <option (click)="changePageSize(15)">15</option>
+          <option (click)="changePageSize(20)">20</option>
         </select>
       </label>
     </li>
