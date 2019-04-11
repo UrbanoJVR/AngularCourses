@@ -3,6 +3,8 @@ import {ApiService} from '../../service/api.service';
 import {Course} from '../../domain/course';
 import {Subscription} from 'rxjs';
 import {Page} from '../../domain/pagedata/page';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {PoupCourseComponent} from '../poup-course/poup-course.component';
 
 @Component({
   selector: 'app-courses',
@@ -23,7 +25,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   sub: Subscription;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private dialog: MatDialog) { }
 
   getCourses(pageSize: number, pageNumber: number) {
     this.sub = this.apiService.getCourses(pageSize, pageNumber).subscribe(
@@ -67,6 +69,15 @@ export class CoursesComponent implements OnInit, OnDestroy {
       return;
     }
     this.actualPageNumber = newPageNumber;
+  }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    this.dialog.open(PoupCourseComponent, dialogConfig);
   }
 
   ngOnDestroy(): void {
