@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ApiService} from '../service/api.service';
-import {Course} from '../domain/course';
+import {ApiService} from '../../service/api.service';
+import {Course} from '../../domain/course';
 import {Subscription} from 'rxjs';
-import {Page} from '../domain/pagedata/page';
+import {Page} from '../../domain/pagedata/page';
 
 @Component({
   selector: 'app-courses',
