@@ -43,10 +43,6 @@ export class PopupCourseComponent implements OnInit {
     }
   }
 
-  save() {
-    console.log('Save');
-  }
-
   closeWithoutSave() {
     console.log('Closed without save');
     this.dialogRef.close();

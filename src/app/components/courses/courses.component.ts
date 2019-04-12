@@ -83,16 +83,45 @@ export class CoursesComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(
       data => {
         if (!isUndefined(data)) {
-          console.log('Data recived in parent courses component:');
-          this.saveNewCourse(data);
+          console.log('Data received in parent courses component:');
+          if (this.verifyDataIntegrity(data)) {
+            this.saveNewCourse(data);
+          } else {
+            console.log('Some data undefined. Cancel save');
+          }
         } else {
           console.log('Undefined data. No will insert');
         }
       }, error => console.log(error));
   }
 
-  saveNewCourse(courseToInsert: Course) {
+  private verifyDataIntegrity(course: Course) {
+    if (isUndefined(course.title)) {
+      console.log('course.title = undefined');
+      return false;
+    }
+    if (isUndefined(course.teacher.id)) {
+      console.log('teacher.id = undefined');
+      return false;
+    }
+    if (isUndefined(course.level)) {
+      console.log('course.level = undefined');
+      return false;
+    }
+    if (isUndefined(course.hours)) {
+      console.log('course.hours = undefined');
+      return false;
+    }
+    if (isUndefined(course.active)) {
+      console.log('course.active = undefined');
+      return false;
+    }
+    return true;
+  }
+
+  private saveNewCourse(courseToInsert: Course) {
     console.log('Calling API service to insert ...');
+    console.log(courseToInsert);
   }
 
   ngOnDestroy(): void {
@@ -103,4 +132,5 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.initParams();
     this.getCourses(this.pageSize, this.actualPageNumber);
   }
+
 }
