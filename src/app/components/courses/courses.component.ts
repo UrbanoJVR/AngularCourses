@@ -4,7 +4,8 @@ import {Course} from '../../domain/course';
 import {Subscription} from 'rxjs';
 import {Page} from '../../domain/pagedata/page';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {PoupCourseComponent} from '../poup-course/poup-course.component';
+import {PopupCourseComponent} from '../poup-course/popup-course.component';
+import {isUndefined} from 'util';
 
 @Component({
   selector: 'app-courses',
@@ -77,7 +78,21 @@ export class CoursesComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
-    this.dialog.open(PoupCourseComponent, dialogConfig);
+    const dialogRef = this.dialog.open(PopupCourseComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (!isUndefined(data)) {
+          console.log('Data recived in parent courses component:');
+          this.saveNewCourse(data);
+        } else {
+          console.log('Undefined data. No will insert');
+        }
+      }, error => console.log(error));
+  }
+
+  saveNewCourse(courseToInsert: Course) {
+    console.log('Calling API service to insert ...');
   }
 
   ngOnDestroy(): void {

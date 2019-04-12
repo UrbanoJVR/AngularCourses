@@ -8,13 +8,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './components/courses/courses.component';
-import {PoupCourseComponent} from './components/poup-course/poup-course.component';
+import {PopupCourseComponent} from './components/poup-course/popup-course.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoursesComponent,
-    PoupCourseComponent
+    PopupCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -22,10 +23,11 @@ import {PoupCourseComponent} from './components/poup-course/poup-course.componen
     HttpClientModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [PoupCourseComponent]
+  entryComponents: [PopupCourseComponent]
 })
 export class AppModule { }
