@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ApiService} from '../../service/api.service';
+import {ApiService} from '../../service/api/api.service';
 import {Course} from '../../domain/course';
 import {Subscription} from 'rxjs';
 import {Page} from '../../domain/pagedata/page';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {PopupCourseComponent} from '../poup-course/popup-course.component';
 import {isUndefined} from 'util';
+import {LogService} from '../../service/log/log.service';
 
 @Component({
   selector: 'app-courses',
@@ -16,6 +17,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   private DEFAULT_PAGE_SIZE = 5;
   private DEFAULT_PAGE_NUMBER = 0;
+  private LOG_TAG = 'COURSES_COMPONENT: ';
 
   protected courses: Course[];
   private actualPageNumber: number;
@@ -25,15 +27,18 @@ export class CoursesComponent implements OnInit, OnDestroy {
   private elementsInPage: number;
 
   sub: Subscription;
+  private logService: LogService;
 
-  constructor(private apiService: ApiService, private dialog: MatDialog) { }
+  constructor(private apiService: ApiService, private dialog: MatDialog) {
+    this.logService = new LogService(this.LOG_TAG);
+  }
 
   getCourses(pageSize: number, pageNumber: number) {
     this.sub = this.apiService.getCourses(pageSize, pageNumber).subscribe(
       response => {
         this.loadParams(response);
-        console.log(response);
-      }, error => console.log(error));
+        this.logService.printLogWithObject('Response from apiService:', response);
+      }, error => this.logService.print(error, LogService.ERROR_MSG));
   }
 
   loadParams(resp: Page<Course>) {
@@ -83,45 +88,46 @@ export class CoursesComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(
       data => {
         if (!isUndefined(data)) {
-          console.log('Data received in parent courses component:');
+          this.logService.print('CoursesComponent: data received from dialog', LogService.DEFAULT_MSG);
           if (this.verifyDataIntegrity(data)) {
+            this.logService.printLogWithObject('Data integrity verification success. Course to insert:', data);
             this.saveNewCourse(data);
           } else {
-            console.log('Some data undefined. Cancel save');
+            this.logService.print('Some data undefined. Cancel save', LogService.WARN_MSG);
           }
         } else {
-          console.log('Undefined data. No will insert');
+          this.logService.print('Undefined data. No will insert', LogService.DEFAULT_MSG);
         }
-      }, error => console.log(error));
+      }, error => this.logService.print(error, LogService.ERROR_MSG));
   }
 
   private verifyDataIntegrity(course: Course) {
+    this.logService.print('Verifying data integrity...', LogService.DEFAULT_MSG);
     if (isUndefined(course.title)) {
-      console.log('course.title = undefined');
+      this.logService.print('course.title = undefined', LogService.WARN_MSG);
       return false;
     }
     if (isUndefined(course.teacher.id)) {
-      console.log('teacher.id = undefined');
+      this.logService.print('teacher.id = undefined', LogService.WARN_MSG);
       return false;
     }
     if (isUndefined(course.level)) {
-      console.log('course.level = undefined');
+      this.logService.print('course.level = undefined', LogService.WARN_MSG);
       return false;
     }
     if (isUndefined(course.hours)) {
-      console.log('course.hours = undefined');
+      this.logService.print('course.hours = undefined', LogService.WARN_MSG);
       return false;
     }
     if (isUndefined(course.active)) {
-      console.log('course.active = undefined');
+      this.logService.print('course.active = undefined', LogService.WARN_MSG);
       return false;
     }
     return true;
   }
 
   private saveNewCourse(courseToInsert: Course) {
-    console.log('Calling API service to insert ...');
-    console.log(courseToInsert);
+    this.logService.print('Calling API service to insert ...', LogService.DEFAULT_MSG);
   }
 
   ngOnDestroy(): void {
@@ -132,5 +138,4 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.initParams();
     this.getCourses(this.pageSize, this.actualPageNumber);
   }
-
 }

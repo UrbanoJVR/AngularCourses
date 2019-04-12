@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Teacher} from '../domain/teacher';
-import {Course} from '../domain/course';
-import {Page} from '../domain/pagedata/page';
+import {Teacher} from '../../domain/teacher';
+import {Course} from '../../domain/course';
+import {Page} from '../../domain/pagedata/page';
 
 @Injectable({
   providedIn: 'root'

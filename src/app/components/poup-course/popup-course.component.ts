@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Teacher} from '../../domain/teacher';
-import {ApiService} from '../../service/api.service';
+import {ApiService} from '../../service/api/api.service';
 import {Subscription} from 'rxjs';
 import {Course} from '../../domain/course';
+import {LogService} from '../../service/log/log.service';
 
 @Component({
   templateUrl: './popup-course.component.html',
@@ -13,13 +14,15 @@ export class PopupCourseComponent implements OnInit {
 
   protected hoursArray: Array<number>;
   protected teachers: Teacher[];
+  private LOG_TAG: 'POPUP_COURSE_COMPONENT: ';
 
   private sub: Subscription;
+  private logService: LogService;
 
   private courseToInsert: Course;
 
   constructor(private apiService: ApiService, private dialogRef: MatDialogRef<PopupCourseComponent>) {
-
+    this.logService = new LogService(this.LOG_TAG);
   }
 
   ngOnInit(): void {
@@ -32,8 +35,8 @@ export class PopupCourseComponent implements OnInit {
     this.sub = this.apiService.getTeachers().subscribe(
       response => {
         this.teachers = response.content;
-        console.log(response);
-      }, error => console.log(error));
+        this.logService.printLogWithObject('Teachers list', response);
+      }, error => this.logService.print(error, LogService.ERROR_MSG));
   }
 
   private initHoursArray() {
@@ -44,7 +47,7 @@ export class PopupCourseComponent implements OnInit {
   }
 
   closeWithoutSave() {
-    console.log('Closed without save');
+    this.logService.print('Closed without save', LogService.DEFAULT_MSG);
     this.dialogRef.close();
   }
 
