@@ -128,6 +128,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   private saveNewCourse(courseToInsert: Course) {
     this.logService.print('Calling API service to insert ...', LogService.DEFAULT_MSG);
+    this.apiService.addCourse(courseToInsert).subscribe();
+    this.ngOnInit();
   }
 
   ngOnDestroy(): void {
