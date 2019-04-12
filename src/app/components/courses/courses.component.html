@@ -10,6 +10,7 @@
         <th>NIVEL</th>
         <th>HORAS</th>
         <th>PROFESOR</th>
+        <th>#</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
         <td>{{course.level}}</td>
         <td>{{course.hours}}</td>
         <td>{{course.teacher.name}}</td>
+        <td>
+          <button class="btn"><i class="material-icons" (click)="editCourse(course)">edit</i></button>
+          <button class="btn"><i class="material-icons" (click)="deleteCourse(course)">delete_forever</i></button>
+        </td>
       </tr>
     </tbody>
   </table>

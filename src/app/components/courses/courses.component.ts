@@ -140,4 +140,12 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.initParams();
     this.getCourses(this.pageSize, this.actualPageNumber);
   }
+
+  editCourse(course: Course) {
+    this.logService.print(course.title, LogService.DEFAULT_MSG);
+  }
+
+  deleteCourse(course: Course) {
+    this.logService.print(course.title, LogService.DEFAULT_MSG);
+  }
 }
