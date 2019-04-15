@@ -16,8 +16,8 @@ export class CoursesInfiniteScrollComponent implements OnInit {
   private LOG_TAG = 'COURSES_INFINITE_SCROLL: ';
   private PAGE_SIZE = 15;
 
-  private courses: Course[];
-  private actualPage: number;
+  private courses: Array<Course>;
+  private pageToGet: number;
   private totalPages: number;
 
   private sub: Subscription;
@@ -25,31 +25,36 @@ export class CoursesInfiniteScrollComponent implements OnInit {
 
   constructor(private apiService: ApiService) {
     this.logService = new LogService(this.LOG_TAG);
-    this.actualPage = 0;
+    this.pageToGet = 0;
     this.courses = new Array<Course>();
   }
 
-  getPageOfCourses(pageToGet: number) {
-    this.sub = this.apiService.getCourses(this.PAGE_SIZE, pageToGet).subscribe(
+  getPageOfCourses() {
+    this.sub = this.apiService.getCourses(this.PAGE_SIZE, this.pageToGet).subscribe(
       response => {
+        this.logService.print('Getting page ' + this.pageToGet + ' ...', LogService.DEFAULT_MSG);
         this.addCoursesToArray(response);
         this.logService.printLogWithObject('Response from apiService:', response);
+        this.pageToGet ++;
       }, error => this.logService.print(error, LogService.ERROR_MSG));
   }
 
   addCoursesToArray(resp: Page<Course>) {
-    if (this.courses.length > 0) {
       const coursesToAppend: Course[] = resp.content;
-      this.courses.concat(coursesToAppend);
+      this.appendCourses(coursesToAppend);
       this.logService.print('Courses appended = ' + coursesToAppend.length, LogService.DEFAULT_MSG);
-    } else {
-      this.courses = resp.content;
-      this.logService.print('Courses array initialized', LogService.DEFAULT_MSG);
+      this.logService.printLogWithObject('Courses content => ', this.courses);
+  }
+
+  appendCourses(coursesToAppend: Course[]) {
+    for (const course of coursesToAppend) {
+      this.courses.push(course);
+      this.logService.print('Added course => ' + course.title, LogService.DEFAULT_MSG);
     }
   }
 
   ngOnInit() {
-    this.getPageOfCourses(this.actualPage);
+    this.getPageOfCourses();
   }
 
   editCourse(course: Course) {
@@ -58,5 +63,10 @@ export class CoursesInfiniteScrollComponent implements OnInit {
 
   deleteCourse(course: Course) {
     this.logService.printLogWithObject('Delete course => ', course);
+  }
+
+  onScroll() {
+    this.logService.print('Scroll DOWN!!', LogService.DEFAULT_MSG);
+    this.getPageOfCourses();
   }
 }
