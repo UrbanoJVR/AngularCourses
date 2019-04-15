@@ -17,7 +17,7 @@ export class InfiniteScrollExampleComponent implements OnInit {
   }
 
   add40lines() {
-    const line = 'Another new line --';
+    const line = 'Another new line -- ';
     let lineCounter = this.linesToWrite.length;
     for (let i = 0; i < 40; i ++) {
       this.addNewLine(line, lineCounter);
