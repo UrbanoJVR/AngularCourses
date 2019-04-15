@@ -1,5 +1,5 @@
 <div class="container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()">
   <h1 style="text-align: center">INFINITE SCROLL EXAMPLE</h1>
   <p *ngFor="let line of linesToWrite">{{line}}</p>
-  <button [ngClass]="'no-hidden'" *ngIf="showGoUpButton" class="btn btn-dark">GO UP</button>
+  <button [ngClass]="'no-hidden'" *ngIf="showGoUpButton" class="btn btn-dark" (click)="scrollTop()">GO UP</button>
 </div>

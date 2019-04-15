@@ -68,4 +68,9 @@ export class InfiniteScrollExampleComponent implements OnInit {
   onScrollUp() {
     this.logService.print('Scrolled UP!', LogService.DEFAULT_MSG);
   }
+
+  scrollTop() {
+    document.body.scrollTop = 0; // Safari
+    document.documentElement.scrollTop = 0; // Other
+  }
 }
