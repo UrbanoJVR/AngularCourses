@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {LogService} from '../../service/log/log.service';
 
 @Component({
   selector: 'app-infinite-scroll-example',
@@ -8,10 +10,20 @@ import { Component, OnInit } from '@angular/core';
 export class InfiniteScrollExampleComponent implements OnInit {
 
   private linesToWrite: Array<string>;
+  private logService: LogService;
+  private LOG_TAG = 'INFINITE_SCROLL_EXAMPLE_COMPONENT: ';
+  private showScrollButton: boolean;
 
-  constructor() { }
+  private finishPage = 5;
+  private actualPage: number;
+
+  constructor() {
+    this.logService = new LogService(this.LOG_TAG);
+    this.actualPage = 0;
+  }
 
   ngOnInit() {
+    this.logService = new LogService(this.LOG_TAG);
     this.linesToWrite = new Array<string>();
     this.add40lines();
   }
@@ -19,13 +31,27 @@ export class InfiniteScrollExampleComponent implements OnInit {
   add40lines() {
     const line = 'Another new line -- ';
     let lineCounter = this.linesToWrite.length;
-    for (let i = 0; i < 40; i ++) {
-      this.addNewLine(line, lineCounter);
-      lineCounter ++;
+    if (this.actualPage < this.finishPage) {
+      for (let i = 0; i < 40; i ++) {
+        this.addNewLine(line, lineCounter);
+        lineCounter ++;
+      }
+      this.actualPage ++;
+    } else {
+      this.logService.print('No more lines. Finish page!', LogService.DEFAULT_MSG);
     }
   }
 
   addNewLine(text: string, lineNumber: number) {
     this.linesToWrite.push(text + lineNumber);
+  }
+
+  onScroll() {
+    this.logService.print('Scrolled!', LogService.DEFAULT_MSG);
+    this.add40lines();
+  }
+
+  onScrollUp() {
+    this.logService.print('Scrolled UP!', LogService.DEFAULT_MSG);
   }
 }
