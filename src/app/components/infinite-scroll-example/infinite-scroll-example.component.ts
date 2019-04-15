@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {LogService} from '../../service/log/log.service';
 
@@ -16,10 +16,24 @@ export class InfiniteScrollExampleComponent implements OnInit {
 
   private finishPage = 5;
   private actualPage: number;
+  private showGoUpButton: boolean;
+  showScrollHeight = 400;
+  hideScrollHeight = 200;
 
   constructor() {
     this.logService = new LogService(this.LOG_TAG);
     this.actualPage = 0;
+    this.showGoUpButton = false;
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (( window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+      this.showGoUpButton = true;
+    } else if ( this.showGoUpButton && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop)
+      < this.hideScrollHeight) {
+      this.showGoUpButton = false;
+    }
   }
 
   ngOnInit() {
