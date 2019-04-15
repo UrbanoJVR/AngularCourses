@@ -10,12 +10,14 @@ import { AppComponent } from './app.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import {PopupCourseComponent} from './components/poup-course/popup-course.component';
 import {FormsModule} from '@angular/forms';
+import { InfiniteScrollExampleComponent } from './components/infinite-scroll-example/infinite-scroll-example.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoursesComponent,
-    PopupCourseComponent
+    PopupCourseComponent,
+    InfiniteScrollExampleComponent
   ],
   imports: [
     BrowserModule,
