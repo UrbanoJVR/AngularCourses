@@ -1,7 +1,7 @@
 <div style="width: 70%; height: 50px; margin-top: 10px; text-align: center; margin-left: auto; margin-right: auto" class="text-light bg-dark rounded fixed-top">
   <h1>CURSOS AUTENTIA</h1>
 </div>
-<div class = "container" infiniteScroll [infiniteScrollDistance]="0.8" [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+<div class = "container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
   <table style="text-align: center; width: 100%; margin-top: 70px" class="table table-striped table-hover">
     <thead class="thead-dark">
     <tr>
@@ -29,4 +29,5 @@
     </tr>
     </tbody>
   </table>
+  <button [ngClass]="'no-hidden'" *ngIf="showGoUpButton" class="btn btn-dark" (click)="scrollTop()">GO UP</button>
 </div>

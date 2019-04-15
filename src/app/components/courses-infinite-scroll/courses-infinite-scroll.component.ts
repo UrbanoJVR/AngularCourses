@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ApiService} from '../../service/api/api.service';
 import {LogService} from '../../service/log/log.service';
 import {Subscription} from 'rxjs';
 import {Course} from '../../domain/course';
 import {Page} from '../../domain/pagedata/page';
-import {isEmpty} from 'rxjs/operators';
 
 @Component({
   selector: 'app-courses-infinite-scroll',
@@ -14,19 +13,22 @@ import {isEmpty} from 'rxjs/operators';
 export class CoursesInfiniteScrollComponent implements OnInit {
 
   private LOG_TAG = 'COURSES_INFINITE_SCROLL: ';
-  private PAGE_SIZE = 15;
+  private PAGE_SIZE = 12;
+  showScrollHeight = 400;
+  hideScrollHeight = 200;
 
   private courses: Array<Course>;
   private pageToGet: number;
-  private totalPages: number;
 
   private sub: Subscription;
   private logService: LogService;
+  private showGoUpButton: boolean;
 
   constructor(private apiService: ApiService) {
     this.logService = new LogService(this.LOG_TAG);
     this.pageToGet = 0;
     this.courses = new Array<Course>();
+    this.showGoUpButton = false;
   }
 
   getPageOfCourses() {
@@ -68,5 +70,20 @@ export class CoursesInfiniteScrollComponent implements OnInit {
   onScroll() {
     this.logService.print('Scroll DOWN!!', LogService.DEFAULT_MSG);
     this.getPageOfCourses();
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (( window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+      this.showGoUpButton = true;
+    } else if ( this.showGoUpButton && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop)
+      < this.hideScrollHeight) {
+      this.showGoUpButton = false;
+    }
+  }
+
+  scrollTop() {
+    document.body.scrollTop = 0; // Safari
+    document.documentElement.scrollTop = 0; // Other
   }
 }
