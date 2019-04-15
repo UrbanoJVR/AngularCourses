@@ -1,5 +1,18 @@
 <div class="container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()">
   <h1 style="text-align: center">INFINITE SCROLL EXAMPLE</h1>
-  <p *ngFor="let line of linesToWrite">{{line}}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><strong>TEXT</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let line of linesToWrite; index as i">
+        <th scope="row">{{i}}</th>
+        <th scope="row">{{line}}</th>
+      </tr>
+    </tbody>
+  </table>
   <button [ngClass]="'no-hidden'" *ngIf="showGoUpButton" class="btn btn-dark" (click)="scrollTop()">GO UP</button>
 </div>
