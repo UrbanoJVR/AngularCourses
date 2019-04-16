@@ -13,7 +13,7 @@ export class InfiniteScrollExampleComponent implements OnInit {
   private logService: LogService;
   private LOG_TAG = 'INFINITE_SCROLL_EXAMPLE_COMPONENT: ';
 
-  private finishPage = 5;
+  private finishPage = 100;
   private actualPage: number;
   private showGoUpButton: boolean;
   showScrollHeight = 400;
@@ -21,7 +21,7 @@ export class InfiniteScrollExampleComponent implements OnInit {
 
   constructor() {
     this.logService = new LogService(this.LOG_TAG);
-    this.actualPage = 0;
+    this.actualPage = 1;
     this.showGoUpButton = false;
   }
 
@@ -44,24 +44,20 @@ export class InfiniteScrollExampleComponent implements OnInit {
   add40lines() {
     const line = 'Another new line -- ';
     let lineCounter = this.linesToWrite.length;
-    if (this.actualPage < this.finishPage) {
-      for (let i = 0; i < 40; i ++) {
-        this.addNewLine(line, lineCounter);
-        lineCounter ++;
-      }
-      this.actualPage ++;
-    } else {
-      this.logService.print('No more lines. Finish page!', LogService.DEFAULT_MSG);
+    for (let i = 0; i < 40; i++) {
+      this.linesToWrite.push(line + lineCounter);
+      lineCounter++;
     }
-  }
-
-  addNewLine(text: string, lineNumber: number) {
-    this.linesToWrite.push(text + lineNumber);
   }
 
   onScroll() {
     this.logService.print('Scrolled!', LogService.DEFAULT_MSG);
-    this.add40lines();
+    if (this.actualPage < this.finishPage) {
+      this.add40lines();
+      this.actualPage ++;
+    } else {
+      this.logService.print('No more lines. Finish page!', LogService.DEFAULT_MSG);
+    }
   }
 
   onScrollUp() {
