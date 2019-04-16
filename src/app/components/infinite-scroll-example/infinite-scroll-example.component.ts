@@ -12,7 +12,6 @@ export class InfiniteScrollExampleComponent implements OnInit {
   private linesToWrite: Array<string>;
   private logService: LogService;
   private LOG_TAG = 'INFINITE_SCROLL_EXAMPLE_COMPONENT: ';
-  private showScrollButton: boolean;
 
   private finishPage = 5;
   private actualPage: number;
