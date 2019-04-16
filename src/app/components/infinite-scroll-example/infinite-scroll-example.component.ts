@@ -1,5 +1,4 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {LogService} from '../../service/log/log.service';
 
 @Component({
@@ -58,10 +57,6 @@ export class InfiniteScrollExampleComponent implements OnInit {
     } else {
       this.logService.print('No more lines. Finish page!', LogService.DEFAULT_MSG);
     }
-  }
-
-  onScrollUp() {
-    this.logService.print('Scrolled UP!', LogService.DEFAULT_MSG);
   }
 
   scrollTop() {

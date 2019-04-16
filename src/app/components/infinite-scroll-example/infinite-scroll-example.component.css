@@ -1,7 +1,3 @@
-.hidden{
-  visibility: hidden;
-}
-
 .no-hidden{
   position: fixed;
   bottom: 10px;
