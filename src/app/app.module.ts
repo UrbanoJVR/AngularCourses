@@ -8,6 +8,7 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CoursesComponent } from './components/courses/courses.component';
 import {PopupCourseComponent} from './components/poup-course/popup-course.component';
 import {FormsModule} from '@angular/forms';
 import { InfiniteScrollExampleComponent } from './components/infinite-scroll-example/infinite-scroll-example.component';
@@ -16,6 +17,7 @@ import { CoursesInfiniteScrollComponent } from './components/courses-infinite-sc
 @NgModule({
   declarations: [
     AppComponent,
+    CoursesComponent,
     PopupCourseComponent,
     InfiniteScrollExampleComponent,
     CoursesInfiniteScrollComponent
