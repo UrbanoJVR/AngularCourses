@@ -17,7 +17,7 @@ export class CoursesInfiniteScrollComponent implements OnInit {
   showScrollHeight = 400;
   hideScrollHeight = 200;
 
-  private courses: Array<Course>;
+  courses: Array<Course>;
   private pageToGet: number;
 
   private sub: Subscription;
