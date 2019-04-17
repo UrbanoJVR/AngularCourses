@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {MatDialogModule, MatSelectModule} from '@angular/material';
+import {MatDialogModule, MatMenuModule, MatSelectModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,12 +11,16 @@ import { AppComponent } from './app.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import {PopupCourseComponent} from './components/poup-course/popup-course.component';
 import {FormsModule} from '@angular/forms';
+import { InfiniteScrollExampleComponent } from './components/infinite-scroll-example/infinite-scroll-example.component';
+import { CoursesInfiniteScrollComponent } from './components/courses-infinite-scroll/courses-infinite-scroll.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoursesComponent,
-    PopupCourseComponent
+    PopupCourseComponent,
+    InfiniteScrollExampleComponent,
+    CoursesInfiniteScrollComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,9 @@ import {FormsModule} from '@angular/forms';
     MatDialogModule,
     BrowserAnimationsModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    InfiniteScrollModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

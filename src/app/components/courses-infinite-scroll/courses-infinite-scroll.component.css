@@ -1,0 +1,15 @@
+.hidden{
+  visibility: hidden;
+}
+
+.no-hidden{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  visibility: visible;
+}
+
+.no-hidden-menu{
+  visibility: visible;
+  margin-top: 5px;
+}

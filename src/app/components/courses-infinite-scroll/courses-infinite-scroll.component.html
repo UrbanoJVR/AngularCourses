@@ -1,0 +1,43 @@
+<div style="width: 70%; height: 50px; margin-top: 10px; text-align: center; margin-left: auto; margin-right: auto" class="text-light bg-dark rounded fixed-top row">
+  <div class="col-sm-2">
+    <button class="btn btn-light text-dark float-left" style="margin-top: 5px" [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="addCourse()">Nuevo Curso</button>
+      <button mat-menu-item (click)="addTeacher()">Nuevo Profesor</button>
+    </mat-menu>
+  </div>
+  <div class="col-sm-8"><h1>CURSOS AUTENTIA</h1></div>
+  <div class="col-sm-2">
+    <button [ngClass]="'no-hidden-menu'" *ngIf="showGoUpButton" class="btn btn-light text-dark float-right" (click)="scrollTop()">GO UP</button>
+  </div>
+</div>
+<div class = "container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+  <table style="text-align: center; width: 100%; margin-top: 70px" class="table table-striped table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>#</th>
+      <th>ID</th>
+      <th>TÍTULO</th>
+      <th>NIVEL</th>
+      <th>HORAS</th>
+      <th>PROFESOR</th>
+      <th>#</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let course of courses; index as i">
+      <th scope="row">{{i}}</th>
+      <th>{{course.id}}</th>
+      <td>{{course.title}}</td>
+      <td>{{course.level}}</td>
+      <td>{{course.hours}}</td>
+      <td>{{course.teacher.name}}</td>
+      <td>
+        <button class="btn"><i class="material-icons" (click)="editCourse(course)">edit</i></button>
+        <button class="btn"><i class="material-icons" (click)="deleteCourse(course)">delete_forever</i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button [ngClass]="'no-hidden'" *ngIf="showGoUpButton" class="btn btn-dark" (click)="scrollTop()">GO UP</button>
+</div>

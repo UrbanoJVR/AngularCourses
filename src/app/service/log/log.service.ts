@@ -11,7 +11,7 @@ export class LogService {
   public static ERROR_MSG = 1;
   public static WARN_MSG = 3;
 
-  private readonly LOG_TAG: string;
+  public LOG_TAG: string;
 
   constructor(tag: string) {
     this.LOG_TAG = tag;
