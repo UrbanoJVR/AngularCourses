@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {MatDialogModule, MatSelectModule} from '@angular/material';
+import {MatDialogModule, MatMenuModule, MatSelectModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
@@ -30,7 +30,8 @@ import { CoursesInfiniteScrollComponent } from './components/courses-infinite-sc
     BrowserAnimationsModule,
     MatSelectModule,
     FormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -86,4 +86,12 @@ export class CoursesInfiniteScrollComponent implements OnInit {
     document.body.scrollTop = 0; // Safari
     document.documentElement.scrollTop = 0; // Other
   }
+
+  addCourse() {
+    this.logService.print('New course dialog', LogService.DEFAULT_MSG);
+  }
+
+  addTeacher() {
+    this.logService.print('New teacher dialog', LogService.DEFAULT_MSG);
+  }
 }

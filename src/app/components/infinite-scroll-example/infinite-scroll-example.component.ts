@@ -12,7 +12,7 @@ export class InfiniteScrollExampleComponent implements OnInit {
   private logService: LogService;
   private LOG_TAG = 'INFINITE_SCROLL_EXAMPLE_COMPONENT: ';
 
-  private finishPage = 100;
+  private finishPage = 150;
   private actualPage: number;
   private showGoUpButton: boolean;
   showScrollHeight = 400;

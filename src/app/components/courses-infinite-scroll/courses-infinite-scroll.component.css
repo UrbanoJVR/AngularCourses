@@ -8,3 +8,8 @@
   right: 10px;
   visibility: visible;
 }
+
+.no-hidden-menu{
+  visibility: visible;
+  margin-top: 5px;
+}
