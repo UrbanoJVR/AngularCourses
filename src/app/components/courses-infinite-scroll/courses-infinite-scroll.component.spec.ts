@@ -24,7 +24,6 @@ describe('CoursesInfiniteScrollComponent', () => {
 
   beforeEach(() => {
     when(mockApiService.getCourses(anything(), anything())).thenReturn({[{id:1, name:"pepe"}]});
-    // tests
 
     fixture = TestBed.createComponent(CoursesInfiniteScrollComponent);
     component = fixture.componentInstance;
