@@ -33,4 +33,46 @@
       </tr>
     </tbody>
   </table>
+  <ul class="nav pills">
+    <!-- FIRST PAGE BUTTON -->
+    <li class="nav-item">
+      <a class="nav-link active bg-dark text-light rounded" href="#" (click)="goToPage(0)">|<<</a>
+    </li>
+    <!-- PREVIOUS PAGE BUTTON -->
+    <li class="nav-item" style="margin-left: 1px">
+      <a class="nav-link active bg-dark text-light rounded" href="#" (click)="goToPage(actualPageNumber - 1)"><</a>
+    </li>
+    <li class="nav-item" style="margin-left: 1px" *ngFor="let p of pages; let i = index">
+      <a class="nav-link active bg-dark text-light rounded-circle" [ngClass]="noActualPage" *ngIf="i != actualPageNumber; else actualPage" href="#" (click)="goToPage(i)">{{i + 1}}</a>
+      <ng-template #noActualPage>
+        <a class="nav-link active bg-dark text-light rounded-circle" href="#" (click)="goToPage(i)">{{i + 1}}</a>
+      </ng-template>
+      <ng-template #actualPage>
+        <a class="nav-link disabled bg-primary text-light rounded-circle" href="#" (click)="goToPage(i)">{{i + 1}}</a>
+      </ng-template>
+    </li>
+    <!-- NEXT PAGE BUTTON -->
+    <li class="nav-item" style="margin-left: 1px">
+      <a class="nav-link active bg-dark text-light rounded" href="#" (click)="goToPage(actualPageNumber + 1)">></a>
+    </li>
+    <!-- LAST PAGE BUTTON -->
+    <li class="nav-item" style="margin-left: 1px">
+      <a class="nav-link active bg-dark text-light rounded" href="#" (click)="goToPage(totalPages)">>>|</a>
+    </li>
+    <!-- SELECT ELEMENTS PER PAGE -->
+    <li class="nav-item" style="margin-left: 1px">
+      <label>
+        <select class="custom-select">
+          <option (click)="changePageSize(1)">1</option>
+          <option selected (click)="changePageSize(5)">5</option>
+          <option (click)="changePageSize(10)">10</option>
+          <option (click)="changePageSize(15)">15</option>
+          <option (click)="changePageSize(20)">20</option>
+        </select>
+      </label>
+    </li>
+    <li style="margin-left: 5px">
+      <button type="button" class="btn btn-dark" (click)="openDialog()">NUEVO CURSO</button>
+    </li>
+  </ul>
 </div>
